@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klinik NLAB - Solusi Vaksin Umroh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .modal-active { overflow: hidden; }
+        .gradient-brand { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 flex justify-center min-h-screen text-slate-900">
+
+    <!-- Container Utama -->
+    <div class="w-full max-w-lg bg-slate-50 min-h-screen shadow-2xl relative flex flex-col border-x border-slate-200">
+        
+        <!-- Navbar -->
+        <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 px-5 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="bg-blue-900 p-1.5 rounded-lg shadow-sm">
+                    <i data-lucide="microscope" class="text-white w-5 h-5"></i>
+                </div>
+                <div>
+                    <span class="font-extrabold text-xl tracking-tighter text-blue-900">NLAB</span>
+                    <span class="block text-[8px] font-bold text-slate-400 -mt-1 tracking-widest uppercase">Clinical Lab</span>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-end leading-tight">
+                <span class="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Travel Partner</span>
+                <span id="travelPartnerName" class="text-[11px] font-black text-white bg-blue-900 px-2 py-1 rounded-md shadow-sm italic">Dago Wisata</span>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="gradient-brand text-white px-6 pt-10 pb-12 rounded-b-[2.5rem] shadow-xl relative overflow-hidden shrink-0">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-white/5 rounded-full"></div>
+            <div class="relative z-10 text-center md:text-left">
+                <h1 class="text-3xl font-extrabold mb-2">Assalamu'alaikum !</h1>
+                <p class="text-blue-100/80 text-sm mb-8 leading-relaxed">
+                    Partner resmi Travel Umroh & Haji. Sedia vaksin wajib untuk perjalanan ibadah Anda.
+                </p>
+                <div class="relative">
+                    <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        placeholder="Cari vaksin atau paket..."
+                        class="w-full pl-12 pr-4 py-4 rounded-2xl bg-white text-slate-800 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm font-medium border-none"
+                    >
+                </div>
+            </div>
+        </div>
+
+        <!-- Banner Kerjasama -->
+        <div class="px-5 -mt-6 relative z-20 shrink-0">
+            <div class="bg-white p-3 rounded-2xl shadow-md border border-slate-100 flex items-center gap-3">
+                <div class="bg-amber-100 p-2 rounded-xl">
+                    <i data-lucide="plane" class="text-amber-600 w-5 h-5"></i>
+                </div>
+                <p class="text-[11px] font-bold text-slate-600 leading-tight">Terintegrasi dengan sistem reservasi <span id="partnerIntegrationName">Dago Wisata</span></p>
+            </div>
+        </div>
+
+        <!-- Filter Kategori -->
+        <div class="px-5 mt-8 shrink-0">
+            <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-2">
+                <button class="filter-btn active bg-blue-900 text-white px-5 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap shadow-lg shadow-blue-200">Semua</button>
+                <button class="filter-btn bg-white text-slate-600 border border-slate-200 px-5 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap">Promo</button>
+                <button class="filter-btn bg-white text-slate-600 border border-slate-200 px-5 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap">Paket Bundling</button>
+                <button class="filter-btn bg-white text-slate-600 border border-slate-200 px-5 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap">Antar Jemput</button>
+            </div>
+        </div>
+
+        <!-- List Vaksin -->
+        <div class="px-5 py-6 flex-1 overflow-y-auto hide-scrollbar">
+            <h2 class="font-extrabold text-slate-800 mb-4 text-lg">Pilihan Layanan</h2>
+            <div id="vaccineList" class="grid grid-cols-2 gap-3 pb-20">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+
+        <!-- Bottom Nav -->
+        <div class="sticky bottom-0 bg-white/95 backdrop-blur-md border-t border-slate-100 px-8 py-4 flex justify-around items-center rounded-t-[2rem] shadow-inner shrink-0 z-40">
+            <a href="index.html" class="flex flex-col items-center gap-1 text-blue-900">
+                <i data-lucide="home" class="w-6 h-6"></i>
+                <span class="text-[10px] font-bold uppercase tracking-wider">Home</span>
+            </a>
+            <a href="riwayat.html" class="flex flex-col items-center gap-1 text-slate-400">
+                <i data-lucide="history" class="w-6 h-6"></i>
+                <span class="text-[10px] font-bold uppercase tracking-wider">Riwayat</span>
+            </a>
+            <a href="jadwal.html" class="flex flex-col items-center gap-1 text-slate-400">
+                <i data-lucide="calendar-check" class="w-6 h-6"></i>
+                <span class="text-[10px] font-bold uppercase tracking-wider">Jadwal</span>
+            </a>
+        </div>
+
+        <!-- Booking Modal -->
+        <div id="bookingModal" class="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-[2px] opacity-0 pointer-events-none transition-opacity duration-300">
+            <div class="bg-white w-full max-w-lg rounded-t-[2.5rem] shadow-2xl transform translate-y-full transition-transform duration-300 flex flex-col max-h-[95vh]">
+                <div class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mt-4 shrink-0"></div>
+                
+                <div class="overflow-y-auto px-6 py-6 scroll-smooth">
+                    <div id="formContent">
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <h2 class="font-extrabold text-2xl text-slate-900 leading-tight">Pendaftaran Peserta</h2>
+                                <p class="text-xs text-slate-500 mt-1">Lengkapi data untuk pemesanan vaksin</p>
+                            </div>
+                            <button onclick="closeModal()" class="p-2 bg-slate-100 rounded-full text-slate-400">
+                                <i data-lucide="x" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+
+                        <form id="bookingForm" class="space-y-8 pb-32">
+                            <!-- Product Summary -->
+                            <div id="selectedInfo" class="flex items-center gap-3 p-4 bg-blue-50/50 border border-blue-100 rounded-3xl">
+                                <!-- Injected -->
+                            </div>
+
+                            <!-- Data Pembeli -->
+                            <section>
+                                <h3 class="flex items-center gap-2 font-extrabold text-slate-800 text-sm mb-4">
+                                    <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-[10px]">1</span>
+                                    Data Pembeli
+                                </h3>
+                                <div class="space-y-4">
+                                    <div class="group">
+                                        <label class="block text-[10px] font-extrabold text-blue-900 uppercase tracking-widest mb-1.5 ml-1">Nama Pembeli</label>
+                                        <input required type="text" class="w-full bg-slate-50 border-2 border-slate-100 focus:border-blue-500 focus:bg-white px-5 py-3.5 rounded-2xl text-sm transition-all outline-none font-semibold" placeholder="Nama penanggung jawab">
+                                    </div>
+                                    <div class="group">
+                                        <label class="block text-[10px] font-extrabold text-blue-900 uppercase tracking-widest mb-1.5 ml-1">No. WhatsApp</label>
+                                        <input required type="tel" class="w-full bg-slate-50 border-2 border-slate-100 focus:border-blue-500 focus:bg-white px-5 py-3.5 rounded-2xl text-sm transition-all outline-none font-semibold" placeholder="0812...">
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Data Peserta -->
+                            <section>
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="flex items-center gap-2 font-extrabold text-slate-800 text-sm">
+                                        <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-[10px]">2</span>
+                                        Data Peserta
+                                    </h3>
+                                    <div class="flex items-center bg-slate-100 rounded-xl p-1 gap-1">
+                                        <button type="button" onclick="changeCount(-1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm text-blue-900 font-bold">-</button>
+                                        <span id="participantCount" class="w-8 text-center text-sm font-black">1</span>
+                                        <button type="button" onclick="changeCount(1)" class="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm text-blue-900 font-bold">+</button>
+                                    </div>
+                                </div>
+                                <div id="participantsContainer" class="space-y-6">
+                                    <!-- Dynamic Participant Fields Injected Here -->
+                                </div>
+                            </section>
+
+                            <!-- Jadwal -->
+                            <section>
+                                <h3 class="flex items-center gap-2 font-extrabold text-slate-800 text-sm mb-4">
+                                    <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-[10px]">3</span>
+                                    Jadwal Vaksin
+                                </h3>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="group">
+                                        <label class="block text-[10px] font-extrabold text-blue-900 uppercase tracking-widest mb-1.5 ml-1">Pilih Tanggal</label>
+                                        <input required id="visitDate" type="date" class="w-full bg-slate-50 border-2 border-slate-100 focus:border-blue-500 focus:bg-white px-4 py-3.5 rounded-2xl text-xs transition-all outline-none font-semibold">
+                                    </div>
+                                    <div class="group">
+                                        <label class="block text-[10px] font-extrabold text-blue-900 uppercase tracking-widest mb-1.5 ml-1">Pilih Waktu</label>
+                                        <select required class="w-full bg-slate-50 border-2 border-slate-100 focus:border-blue-500 focus:bg-white px-4 py-3.5 rounded-2xl text-xs transition-all outline-none font-semibold">
+                                            <option value="">-- Jam --</option>
+                                            <option>09:00 WIB</option>
+                                            <option>11:00 WIB</option>
+                                            <option>13:00 WIB</option>
+                                            <option>15:00 WIB</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Lokasi Penjemputan (Conditional) -->
+                            <section id="pickupSection" class="hidden">
+                                <h3 class="flex items-center gap-2 font-extrabold text-slate-800 text-sm mb-4">
+                                    <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-[10px]">4</span>
+                                    Lokasi Penjemputan
+                                </h3>
+                                <div class="bg-emerald-50 border border-emerald-100 p-5 rounded-3xl space-y-4">
+                                    <div class="group">
+                                        <label class="block text-[10px] font-extrabold text-emerald-900 uppercase tracking-widest mb-1.5 ml-1">Alamat Lengkap</label>
+                                        <textarea class="w-full bg-white border-2 border-emerald-100 focus:border-emerald-500 px-4 py-3 rounded-2xl text-sm transition-all outline-none font-medium h-24" placeholder="Jl. Nama Jalan No..."></textarea>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div class="group">
+                                            <label class="block text-[10px] font-extrabold text-emerald-900 uppercase tracking-widest mb-1.5 ml-1">Nama PIC</label>
+                                            <input type="text" class="w-full bg-white border-2 border-emerald-100 focus:border-emerald-500 px-4 py-3.5 rounded-2xl text-sm transition-all outline-none font-semibold" placeholder="Nama kontak">
+                                        </div>
+                                        <div class="group">
+                                            <label class="block text-[10px] font-extrabold text-emerald-900 uppercase tracking-widest mb-1.5 ml-1">No. WA PIC</label>
+                                            <input type="tel" class="w-full bg-white border-2 border-emerald-100 focus:border-emerald-500 px-4 py-3.5 rounded-2xl text-sm transition-all outline-none font-semibold" placeholder="08...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </form>
+                    </div>
+
+                    <!-- Success State -->
+                    <div id="successContent" class="hidden py-16 text-center">
+                        <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+                            <i data-lucide="check" class="text-green-600 w-12 h-12"></i>
+                        </div>
+                        <h2 class="text-3xl font-black text-slate-900 mb-3">Pesanan Terkirim!</h2>
+                        <p class="text-slate-500 text-sm mb-10 leading-relaxed px-4">Admin Klinik NLAB akan segera mengirimkan rincian pembayaran ke WhatsApp Pembeli.</p>
+                        <button onclick="closeModal()" class="w-full py-4 bg-slate-900 text-white font-bold rounded-2xl shadow-lg">
+                            Kembali ke Beranda
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Footer Modal (Sticky Price & Button) -->
+                <div id="modalFooter" class="p-6 bg-white border-t border-slate-100 flex items-center justify-between gap-4 shrink-0">
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Harga</p>
+                        <p id="totalPriceDisplay" class="text-xl font-black text-blue-900 tracking-tight">Rp 0</p>
+                    </div>
+                    <button form="bookingForm" type="submit" class="flex-1 py-4 bg-blue-900 text-white font-bold rounded-2xl shadow-xl shadow-blue-200 active:scale-[0.97] transition-all">
+                        Kirim Pesanan
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const BADGE_COLORS = {
+            'Promo': 'bg-amber-500 text-white',
+            'Paket Bundling': 'bg-indigo-600 text-white',
+            'Antar Jemput': 'bg-emerald-600 text-white',
+            'Default': 'bg-blue-900 text-white'
+        };
+
+        const VACCINE_DATA = [
+            { id: 1, name: 'Vaksin Meningitis', price: 350000, category: 'Promo', badge: 'Promo', image: 'https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=400&h=250&fit=crop' },
+            { id: 2, name: 'Bundle Umroh Hemat', price: 550000, category: 'Paket Bundling', badge: 'Paket Bundling', image: 'https://images.unsplash.com/photo-1623682688253-c35512ff8039?w=400&h=250&fit=crop' },
+            { id: 3, name: 'Vaksin Influenza', price: 275000, category: 'Promo', badge: 'Promo', image: 'https://images.unsplash.com/photo-1618015358954-344302f421a4?w=400&h=250&fit=crop' },
+            { id: 4, name: 'Vaksin + Homecare', price: 700000, category: 'Antar Jemput', badge: 'Antar Jemput', image: 'https://images.unsplash.com/photo-1659353888306-e06177765540?w=400&h=250&fit=crop' },
+            { id: 5, name: 'Paket Haji Plus', price: 850000, category: 'Paket Bundling', badge: 'Paket Bundling', image: 'https://images.unsplash.com/photo-1618961734760-466979ce35b0?w=400&h=250&fit=crop' },
+            { id: 6, name: 'Vaksin Pneumonia', price: 900000, category: 'Semua', badge: 'Spesial', image: 'https://images.unsplash.com/photo-1626420925443-c6421f87daa9?w=400&h=250&fit=crop' }
+        ];
+
+        const vaccineList = document.getElementById('vaccineList');
+        const searchInput = document.getElementById('searchInput');
+        const modal = document.getElementById('bookingModal');
+        const modalContent = modal.querySelector('div');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const participantsContainer = document.getElementById('participantsContainer');
+        const participantCountEl = document.getElementById('participantCount');
+        const totalPriceDisplay = document.getElementById('totalPriceDisplay');
+        const visitDateInput = document.getElementById('visitDate');
+        const pickupSection = document.getElementById('pickupSection');
+
+        let currentFilter = 'Semua';
+        let currentVaccine = null;
+        let count = 1;
+
+        function formatIDR(num) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(num);
+        }
+
+        function renderVaccines(query = '') {
+            let filtered = VACCINE_DATA;
+            if (currentFilter !== 'Semua') filtered = filtered.filter(v => v.category === currentFilter);
+            if (query) filtered = filtered.filter(v => v.name.toLowerCase().includes(query.toLowerCase()));
+
+            vaccineList.innerHTML = '';
+            filtered.forEach(v => {
+                const badgeClass = BADGE_COLORS[v.badge] || BADGE_COLORS['Default'];
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden active:scale-[0.98] transition-all cursor-pointer group flex flex-col";
+                card.onclick = () => openModal(v);
+                card.innerHTML = `
+                    <div class="relative h-28 overflow-hidden">
+                        <img src="${v.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-2 left-2 ${badgeClass} px-2.5 py-1 rounded-lg text-[8px] font-black uppercase tracking-wider shadow-md">
+                            ${v.badge}
+                        </div>
+                    </div>
+                    <div class="p-3 flex flex-col flex-1">
+                        <h3 class="font-bold text-slate-900 text-[11px] leading-tight mb-1 line-clamp-2 h-7">${v.name}</h3>
+                        <div class="mt-auto pt-2">
+                            <span class="text-xs font-black text-blue-900">${formatIDR(v.price)}</span>
+                            <button class="w-full mt-2 py-1.5 bg-blue-900 text-white text-[9px] font-extrabold rounded-xl border border-blue-900">Pilih</button>
+                        </div>
+                    </div>`;
+                vaccineList.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function openModal(vaccine) {
+            currentVaccine = vaccine;
+            count = 1;
+            participantCountEl.innerText = count;
+            
+            const minDate = new Date();
+            minDate.setDate(minDate.getDate() + 7);
+            visitDateInput.min = minDate.toISOString().split('T')[0];
+
+            // Set default value to min date
+            visitDateInput.value = visitDateInput.min;
+            
+            if (vaccine.badge === 'Antar Jemput' || vaccine.category === 'Antar Jemput') {
+                pickupSection.classList.remove('hidden');
+            } else {
+                pickupSection.classList.add('hidden');
+            }
+
+            const badgeClass = BADGE_COLORS[vaccine.badge] || BADGE_COLORS['Default'];
+            document.getElementById('selectedInfo').innerHTML = `
+                <img src="${vaccine.image}" class="w-12 h-12 rounded-xl object-cover">
+                <div>
+                    <h4 class="font-bold text-slate-900 text-sm">${vaccine.name}</h4>
+                    <span class="${badgeClass} text-[7px] px-1.5 py-0.5 rounded font-black uppercase">${vaccine.badge}</span>
+                </div>`;
+
+            updateParticipantsForm();
+            updateTotal();
+            
+            document.getElementById('formContent').classList.remove('hidden');
+            document.getElementById('modalFooter').classList.remove('hidden');
+            document.getElementById('successContent').classList.add('hidden');
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('translate-y-full');
+            document.body.classList.add('modal-active');
+            lucide.createIcons();
+        }
+
+        function changeCount(val) {
+            if (count + val < 1) return;
+            count += val;
+            participantCountEl.innerText = count;
+            updateParticipantsForm();
+            updateTotal();
+        }
+
+        function updateParticipantsForm() {
+            participantsContainer.innerHTML = '';
+            for (let i = 1; i <= count; i++) {
+                const div = document.createElement('div');
+                div.className = "p-4 bg-white border border-slate-100 rounded-2xl shadow-sm space-y-3";
+                div.innerHTML = `
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Peserta #${i}</span>
+                        <div class="h-[1px] flex-1 bg-slate-50"></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <input required type="text" class="w-full bg-slate-50 px-4 py-3 rounded-xl text-xs outline-none focus:ring-1 focus:ring-blue-500" placeholder="Nama Lengkap">
+                        <input required type="tel" class="w-full bg-slate-50 px-4 py-3 rounded-xl text-xs outline-none focus:ring-1 focus:ring-blue-500" placeholder="WhatsApp">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <input required type="number" class="w-full bg-slate-50 px-4 py-3 rounded-xl text-xs outline-none focus:ring-1 focus:ring-blue-500" placeholder="NIK">
+                        <input type="text" class="w-full bg-slate-50 px-4 py-3 rounded-xl text-xs outline-none focus:ring-1 focus:ring-blue-500" placeholder="No. Paspor (Opsional)">
+                    </div>`;
+                participantsContainer.appendChild(div);
+            }
+        }
+
+        function updateTotal() {
+            if (!currentVaccine) return;
+            const total = currentVaccine.price * count;
+            totalPriceDisplay.innerText = formatIDR(total);
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.add('translate-y-full');
+            document.body.classList.remove('modal-active');
+        }
+
+        document.getElementById('bookingForm').onsubmit = (e) => {
+            e.preventDefault();
+            document.getElementById('successContent').innerHTML = `<div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner"><i data-lucide="check" class="text-green-600 w-12 h-12"></i></div><h2 class="text-3xl font-black text-slate-900 mb-3">Pesanan Terkirim!</h2><p class="text-slate-500 text-sm mt-8 mb-2">Kode booking Anda:</p><p class="text-4xl font-black text-blue-900 tracking-widest">569271</p><p class="text-slate-500 text-xs mt-4 mb-8 leading-relaxed px-4">Harap ingat baik-baik, kode booking juga dikirim ke WA Anda.</p><button onclick="closeModal()" class="w-full py-4 bg-slate-900 text-white font-bold rounded-2xl shadow-lg">Kembali ke Beranda</button>`;
+            document.getElementById('formContent').classList.add('hidden');
+            document.getElementById('modalFooter').classList.add('hidden');
+            document.getElementById('successContent').classList.remove('hidden');
+            lucide.createIcons();
+        };
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.className = "filter-btn bg-white text-slate-600 border border-slate-200 px-5 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap");
+                btn.className = "filter-btn active bg-blue-900 text-white px-5 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap shadow-lg shadow-blue-200";
+                currentFilter = btn.innerText;
+                renderVaccines(searchInput.value);
+            });
+        });
+
+        searchInput.oninput = (e) => renderVaccines(e.target.value);
+        
+        // Init
+        function setTravelPartnerFromUrl() {
+            let partnerName = 'Dago Wisata'; // Nama default
+
+            // 1. Cek Query Parameter (Prioritas untuk testing local: file.html?partner=nama)
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('partner')) {
+                partnerName = urlParams.get('partner');
+            } else {
+                // 2. Cek Path URL (untuk live server: file.html/nama)
+                const path = window.location.pathname;
+                const pathSegments = path.split('/');
+                const htmlFileSegmentIndex = pathSegments.findIndex(segment => segment.includes('.html'));
+
+                if (htmlFileSegmentIndex > -1 && htmlFileSegmentIndex + 1 < pathSegments.length) {
+                    const partnerSlug = pathSegments[htmlFileSegmentIndex + 1];
+                    if (partnerSlug) partnerName = partnerSlug;
+                }
+            }
+
+            // Format nama: ganti _ atau - dengan spasi dan kapitalisasi setiap kata
+            partnerName = partnerName
+                .replace(/[_-]/g, ' ')
+                .replace(/\b\w/g, char => char.toUpperCase());
+            
+            const partnerElement = document.getElementById('travelPartnerName');
+            if (partnerElement) {
+                partnerElement.textContent = partnerName;
+            }
+            const partnerIntegrationElement = document.getElementById('partnerIntegrationName');
+            if (partnerIntegrationElement) {
+                partnerIntegrationElement.textContent = partnerName;
+            }
+        }
+        setTravelPartnerFromUrl();
+        renderVaccines();
+        lucide.createIcons();
+    </script>
+</body>
+</html>
