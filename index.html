@@ -12,6 +12,7 @@
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .modal-active { overflow: hidden; }
         .gradient-brand { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); }
+        .gradient-kimia-farma { background: linear-gradient(135deg, #c2410c 0%, #f97316 100%); }
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -32,14 +33,9 @@
                     <i data-lucide="microscope" class="text-white w-5 h-5"></i>
                 </div>
                 <div>
-                    <span class="font-extrabold text-xl tracking-tighter text-blue-900">NLAB</span>
-                    <span class="block text-[8px] font-bold text-slate-400 -mt-1 tracking-widest uppercase">Clinical Lab</span>
+                    <span id="clinicName" class="font-extrabold text-xl tracking-tighter text-blue-900">NLAB</span>
+                    <span id="clinicSlogan" class="block text-[8px] font-bold text-slate-400 -mt-1 tracking-widest uppercase">Clinical Lab</span>
                 </div>
-            </div>
-            
-            <div class="flex flex-col items-end leading-tight">
-                <span class="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Travel Partner</span>
-                <span id="travelPartnerName" class="text-[11px] font-black text-white bg-blue-900 px-2 py-1 rounded-md shadow-sm italic">Dago Wisata</span>
             </div>
         </nav>
 
@@ -60,16 +56,6 @@
                         class="w-full pl-12 pr-4 py-4 rounded-2xl bg-white text-slate-800 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all text-sm font-medium border-none"
                     >
                 </div>
-            </div>
-        </div>
-
-        <!-- Banner Kerjasama -->
-        <div class="px-5 -mt-6 relative z-20 shrink-0">
-            <div class="bg-white p-3 rounded-2xl shadow-md border border-slate-100 flex items-center gap-3">
-                <div class="bg-amber-100 p-2 rounded-xl">
-                    <i data-lucide="plane" class="text-amber-600 w-5 h-5"></i>
-                </div>
-                <p class="text-[11px] font-bold text-slate-600 leading-tight">Terintegrasi dengan sistem reservasi <span id="partnerIntegrationName">Dago Wisata</span></p>
             </div>
         </div>
 
@@ -130,10 +116,25 @@
                                 <!-- Injected -->
                             </div>
 
+                            <!-- Pilih Travel -->
+                            <section class="relative z-20">
+                                <h3 class="flex items-center gap-2 font-extrabold text-slate-800 text-sm mb-4">
+                                    <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-[10px]">1</span>
+                                    Pilih Travel
+                                </h3>
+                                <div class="group relative">
+                                    <label class="block text-[10px] font-extrabold text-blue-900 uppercase tracking-widest mb-1.5 ml-1">Nama Travel</label>
+                                    <input required type="text" id="travelInput" class="w-full bg-slate-50 border-2 border-slate-100 focus:border-blue-500 focus:bg-white px-5 py-3.5 rounded-2xl text-sm transition-all outline-none font-semibold" placeholder="Ketik nama travel..." autocomplete="off">
+                                    <div id="travelDropdown" class="absolute left-0 right-0 top-full mt-2 bg-white border border-slate-100 rounded-2xl shadow-xl hidden max-h-48 overflow-y-auto z-30">
+                                        <!-- Options injected via JS -->
+                                    </div>
+                                </div>
+                            </section>
+
                             <!-- Data Pembeli -->
                             <section>
                                 <h3 class="flex items-center gap-2 font-extrabold text-slate-800 text-sm mb-4">
-                                    <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-[10px]">1</span>
+                                    <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-[10px]">2</span>
                                     Data Pembeli
                                 </h3>
                                 <div class="space-y-4">
@@ -152,7 +153,7 @@
                             <section>
                                 <div class="flex justify-between items-center mb-4">
                                     <h3 class="flex items-center gap-2 font-extrabold text-slate-800 text-sm">
-                                        <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-[10px]">2</span>
+                                        <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-[10px]">3</span>
                                         Data Peserta
                                     </h3>
                                     <div class="flex items-center bg-slate-100 rounded-xl p-1 gap-1">
@@ -169,17 +170,17 @@
                             <!-- Jadwal -->
                             <section>
                                 <h3 class="flex items-center gap-2 font-extrabold text-slate-800 text-sm mb-4">
-                                    <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-[10px]">3</span>
+                                    <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-[10px]">4</span>
                                     Jadwal Vaksin
                                 </h3>
                                 <div class="grid grid-cols-2 gap-3">
                                     <div class="group">
                                         <label class="block text-[10px] font-extrabold text-blue-900 uppercase tracking-widest mb-1.5 ml-1">Pilih Tanggal</label>
-                                        <input required id="visitDate" type="date" class="w-full bg-slate-50 border-2 border-slate-100 focus:border-blue-500 focus:bg-white px-4 py-3.5 rounded-2xl text-xs transition-all outline-none font-semibold">
+                                        <input required id="visitDate" type="date" class="w-full bg-slate-50 border-2 border-slate-100 focus:border-blue-500 focus:bg-white px-4 py-3.5 rounded-2xl text-xs transition-all outline-none font-semibold focus:border-blue-500">
                                     </div>
                                     <div class="group">
                                         <label class="block text-[10px] font-extrabold text-blue-900 uppercase tracking-widest mb-1.5 ml-1">Pilih Waktu</label>
-                                        <select required class="w-full bg-slate-50 border-2 border-slate-100 focus:border-blue-500 focus:bg-white px-4 py-3.5 rounded-2xl text-xs transition-all outline-none font-semibold">
+                                        <select required class="w-full bg-slate-50 border-2 border-slate-100 focus:border-blue-500 focus:bg-white px-4 py-3.5 rounded-2xl text-xs transition-all outline-none font-semibold focus:border-blue-500">
                                             <option value="">-- Jam --</option>
                                             <option>09:00 WIB</option>
                                             <option>11:00 WIB</option>
@@ -193,7 +194,7 @@
                             <!-- Lokasi Penjemputan (Conditional) -->
                             <section id="pickupSection" class="hidden">
                                 <h3 class="flex items-center gap-2 font-extrabold text-slate-800 text-sm mb-4">
-                                    <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-[10px]">4</span>
+                                    <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center text-[10px]">5</span>
                                     Lokasi Penjemputan
                                 </h3>
                                 <div class="bg-emerald-50 border border-emerald-100 p-5 rounded-3xl space-y-4">
@@ -214,6 +215,26 @@
                                 </div>
                             </section>
                         </form>
+                    </div>
+
+                    <!-- Captcha State -->
+                    <div id="captchaContent" class="hidden py-10 text-center">
+                        <h2 class="text-2xl font-black text-slate-900 mb-4">Verifikasi Keamanan</h2>
+                        <p class="text-slate-500 text-sm mb-6">Masukkan 5 karakter di bawah ini untuk melanjutkan.</p>
+                        
+                        <div class="bg-slate-200 w-48 mx-auto py-4 rounded-lg mb-4 select-none">
+                            <p id="captchaCode" class="text-3xl font-black text-slate-700 tracking-[.25em]" style="text-decoration: line-through; font-family: 'Courier New', monospace; background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'20\'%3E%3Cpath d=\'M10 10 C 20 0, 30 20, 40 10 S 60 0, 70 10, 80 20, 90 10\' stroke=\'rgba(0,0,0,0.2)\' fill=\'transparent\'/%3E%3C/svg%3E');">
+                                <!-- JS will inject code -->
+                            </p>
+                        </div>
+                    
+                        <input type="text" id="captchaInput" maxlength="5" class="w-full max-w-xs mx-auto text-center mb-4 px-5 py-3.5 rounded-2xl text-lg tracking-widest transition-all outline-none font-semibold border-2 border-slate-200 focus:border-blue-500" placeholder="....." autocomplete="off">
+                        
+                        <div id="captchaError" class="text-red-500 text-xs mb-4 hidden">Kode tidak cocok. Silakan coba lagi.</div>
+                    
+                        <button id="verifyCaptchaBtn" class="w-full max-w-xs mx-auto py-4 bg-blue-900 text-white font-bold rounded-2xl shadow-xl shadow-blue-200 active:scale-[0.97] transition-all">
+                            Verifikasi & Lihat Kode Booking
+                        </button>
                     </div>
 
                     <!-- Success State -->
@@ -294,12 +315,12 @@
                 card.innerHTML = `
                     <div class="relative h-28 overflow-hidden">
                         <img src="${v.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute top-2 left-2 ${badgeClass} px-2.5 py-1 rounded-lg text-[8px] font-black uppercase tracking-wider shadow-md">
-                            ${v.badge}
-                        </div>
                     </div>
                     <div class="p-3 flex flex-col flex-1">
                         <h3 class="font-bold text-slate-900 text-[11px] leading-tight mb-1 line-clamp-2 h-7">${v.name}</h3>
+                        <div class="mb-1">
+                            <span class="${badgeClass} px-1.5 py-0.5 rounded text-[7px] font-bold uppercase tracking-wider inline-block">${v.badge}</span>
+                        </div>
                         <div class="mt-auto pt-2">
                             <span class="text-xs font-black text-blue-900">${formatIDR(v.price)}</span>
                             <button class="w-full mt-2 py-1.5 bg-blue-900 text-white text-[9px] font-extrabold rounded-xl border border-blue-900">Pilih</button>
@@ -372,7 +393,7 @@
                         <input required type="tel" class="w-full bg-slate-50 px-4 py-3 rounded-xl text-xs outline-none focus:ring-1 focus:ring-blue-500" placeholder="WhatsApp">
                     </div>
                     <div class="grid grid-cols-2 gap-3">
-                        <input required type="number" class="w-full bg-slate-50 px-4 py-3 rounded-xl text-xs outline-none focus:ring-1 focus:ring-blue-500" placeholder="NIK">
+                        <input type="number" class="w-full bg-slate-50 px-4 py-3 rounded-xl text-xs outline-none focus:ring-1 focus:ring-blue-500" placeholder="NIK (opsional)">
                         <input type="text" class="w-full bg-slate-50 px-4 py-3 rounded-xl text-xs outline-none focus:ring-1 focus:ring-blue-500" placeholder="No. Paspor (Opsional)">
                     </div>`;
                 participantsContainer.appendChild(div);
@@ -391,14 +412,48 @@
             document.body.classList.remove('modal-active');
         }
 
+        let generatedCaptcha = '';
+
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let result = '';
+            for (let i = 0; i < 5; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            generatedCaptcha = result;
+            document.getElementById('captchaCode').textContent = generatedCaptcha;
+        }
+
         document.getElementById('bookingForm').onsubmit = (e) => {
             e.preventDefault();
-            document.getElementById('successContent').innerHTML = `<div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner"><i data-lucide="check" class="text-green-600 w-12 h-12"></i></div><h2 class="text-3xl font-black text-slate-900 mb-3">Pesanan Terkirim!</h2><p class="text-slate-500 text-sm mt-8 mb-2">Kode booking Anda:</p><p class="text-4xl font-black text-blue-900 tracking-widest">569271</p><p class="text-slate-500 text-xs mt-4 mb-8 leading-relaxed px-4">Harap ingat baik-baik, kode booking juga dikirim ke WA Anda.</p><button onclick="closeModal()" class="w-full py-4 bg-slate-900 text-white font-bold rounded-2xl shadow-lg">Kembali ke Beranda</button>`;
             document.getElementById('formContent').classList.add('hidden');
             document.getElementById('modalFooter').classList.add('hidden');
-            document.getElementById('successContent').classList.remove('hidden');
-            lucide.createIcons();
+            
+            generateCaptcha();
+            document.getElementById('captchaInput').value = '';
+            document.getElementById('captchaError').classList.add('hidden');
+            document.getElementById('captchaContent').classList.remove('hidden');
+            setTimeout(() => document.getElementById('captchaInput').focus(), 300);
         };
+
+        document.getElementById('verifyCaptchaBtn').addEventListener('click', () => {
+            const captchaInput = document.getElementById('captchaInput');
+            const captchaError = document.getElementById('captchaError');
+
+            if (captchaInput.value.toUpperCase() === generatedCaptcha) {
+                captchaError.classList.add('hidden');
+                document.getElementById('captchaContent').classList.add('hidden');
+                
+                document.getElementById('successContent').innerHTML = `<div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner"><i data-lucide="check" class="text-green-600 w-12 h-12"></i></div><h2 class="text-3xl font-black text-slate-900 mb-3">Pesanan Terkirim!</h2><p class="text-slate-500 text-sm mt-8 mb-2">Kode booking Anda:</p><p class="text-4xl font-black text-blue-900 tracking-widest">569271</p><p class="text-slate-500 text-xs mt-4 mb-8 leading-relaxed px-4">Harap ingat baik-baik, kode booking juga dikirim ke WA Anda.</p><button onclick="closeModal()" class="w-full py-4 bg-slate-900 text-white font-bold rounded-2xl shadow-lg">Kembali ke Beranda</button>`;
+                document.getElementById('successContent').classList.remove('hidden');
+                lucide.createIcons();
+            } else {
+                captchaError.classList.remove('hidden');
+                generateCaptcha();
+                captchaInput.value = '';
+                captchaInput.focus();
+            }
+        });
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -411,41 +466,85 @@
 
         searchInput.oninput = (e) => renderVaccines(e.target.value);
         
-        // Init
-        function setTravelPartnerFromUrl() {
-            let partnerName = 'Dago Wisata'; // Nama default
+        // Travel Autocomplete Logic
+        const TRAVEL_DATA = ['Dago Wisata', 'Rabbani Tour', 'Khalifah Tour', 'Arminareka Perdana', 'Percik Tours'];
+        const travelInput = document.getElementById('travelInput');
+        const travelDropdown = document.getElementById('travelDropdown');
 
-            // 1. Cek Query Parameter (Prioritas untuk testing local: file.html?partner=nama)
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('partner')) {
-                partnerName = urlParams.get('partner');
-            } else {
-                // 2. Cek Path URL (untuk live server: file.html/nama)
-                const path = window.location.pathname;
-                const pathSegments = path.split('/');
-                const htmlFileSegmentIndex = pathSegments.findIndex(segment => segment.includes('.html'));
-
-                if (htmlFileSegmentIndex > -1 && htmlFileSegmentIndex + 1 < pathSegments.length) {
-                    const partnerSlug = pathSegments[htmlFileSegmentIndex + 1];
-                    if (partnerSlug) partnerName = partnerSlug;
-                }
-            }
-
-            // Format nama: ganti _ atau - dengan spasi dan kapitalisasi setiap kata
-            partnerName = partnerName
-                .replace(/[_-]/g, ' ')
-                .replace(/\b\w/g, char => char.toUpperCase());
+        function renderTravelOptions(query) {
+            const filtered = query 
+                ? TRAVEL_DATA.filter(t => t.toLowerCase().includes(query.toLowerCase()))
+                : TRAVEL_DATA;
             
-            const partnerElement = document.getElementById('travelPartnerName');
-            if (partnerElement) {
-                partnerElement.textContent = partnerName;
+            travelDropdown.innerHTML = '';
+            
+            if (filtered.length === 0) {
+                travelDropdown.classList.add('hidden');
+                return;
             }
-            const partnerIntegrationElement = document.getElementById('partnerIntegrationName');
-            if (partnerIntegrationElement) {
-                partnerIntegrationElement.textContent = partnerName;
+
+            filtered.forEach(t => {
+                const div = document.createElement('div');
+                div.className = 'px-5 py-3 hover:bg-slate-50 cursor-pointer text-sm font-bold text-slate-700 border-b border-slate-50 last:border-none';
+                div.textContent = t;
+                div.onclick = () => {
+                    travelInput.value = t;
+                    travelDropdown.classList.add('hidden');
+                };
+                travelDropdown.appendChild(div);
+            });
+            
+            travelDropdown.classList.remove('hidden');
+        }
+
+        travelInput.addEventListener('focus', () => renderTravelOptions(travelInput.value));
+        travelInput.addEventListener('input', (e) => renderTravelOptions(e.target.value));
+        document.addEventListener('click', (e) => { if (!travelInput.contains(e.target) && !travelDropdown.contains(e.target)) travelDropdown.classList.add('hidden'); });
+
+        // Init
+        function setupClinicProfile() {
+            const clinicConfigs = {
+                'nlab': {
+                    name: 'NLAB',
+                    slogan: 'Clinical Lab'
+                },
+                'kimia-farma': {
+                    name: 'Kimia Farma',
+                    slogan: 'Laboratorium Klinik',
+                    applyTheme: () => {
+                        const hero = document.querySelector('.gradient-brand');
+                        if (hero) {
+                            hero.classList.replace('gradient-brand', 'gradient-kimia-farma');
+                        }
+                        document.querySelectorAll('.text-blue-900').forEach(el => el.classList.replace('text-blue-900', 'text-orange-500'));
+                        document.querySelectorAll('.bg-blue-900').forEach(el => el.classList.replace('bg-blue-900', 'bg-orange-500'));
+                        document.querySelectorAll('.border-blue-900').forEach(el => el.classList.replace('border-blue-900', 'border-orange-500'));
+                        document.querySelectorAll('.shadow-blue-200').forEach(el => el.classList.replace('shadow-blue-200', 'shadow-orange-200'));
+                        document.querySelectorAll('.focus\\:border-blue-500').forEach(el => {
+                            el.classList.remove('focus:border-blue-500');
+                            el.classList.add('focus:border-orange-500');
+                        });
+                    }
+                }
+            };
+
+            let clinicId = 'nlab';
+            const urlParams = new URLSearchParams(window.location.search);
+            const clinicParam = urlParams.get('clinic');
+            if (clinicParam && clinicConfigs[clinicParam.toLowerCase()]) {
+                clinicId = clinicParam.toLowerCase();
+            }
+            
+            const config = clinicConfigs[clinicId];
+
+            document.getElementById('clinicName').textContent = config.name;
+            document.getElementById('clinicSlogan').textContent = config.slogan;
+
+            if (config.applyTheme) {
+                config.applyTheme();
             }
         }
-        setTravelPartnerFromUrl();
+        setupClinicProfile();
         renderVaccines();
         lucide.createIcons();
     </script>
